@@ -6,9 +6,16 @@ import subprocess
 import platform
 from datetime import date
 import requests, base64, json, re
+import sys
 
-logo_path = os.path.join(os.path.dirname(__file__), "logo", "logo.ico")
-contacts_file = os.path.join(os.path.dirname(__file__), "contacts.json")
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(__file__))
+    return os.path.join(base_path, relative_path)
+
+
+logo_path = resource_path("logo/logo.ico")
+contacts_file = resource_path("contacts.json")
 
 class ContactManager(QtWidgets.QDialog):
     def __init__(self, contacts, parent=None):
